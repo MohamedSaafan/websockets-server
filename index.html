@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="send">send something to the server</button>
+    <button id="join">join</button>
+    <button id="sendCards">sendCards</button>
+    <input type="text" id="messageInput" autofocus />
+    <script>
+      const ws = new WebSocket("ws://localhost:9090/");
+
+      send.addEventListener("click", (e) => {
+        ws.send(
+          JSON.stringify({
+            method: "message",
+            payload: messageInput.value,
+            clientId,
+          })
+        );
+      });
+      sendCards.addEventListener("click", () => {
+        ws.send(
+          JSON.stringify({
+            method: "chosen-cards",
+            payload: ["card1", "card2", "card3"],
+            clientId,
+          })
+        );
+      });
+      join.addEventListener("click", () => {
+        ws.send(JSON.stringify({ method: "join-me", clientId }));
+      });
+      let clientId = null;
+
+      ws.onmessage = (message) => {
+        //message.data
+        const response = JSON.parse(message.data);
+        if (response.method === "connect") {
+          console.log("client id connected successfully", response.clientId);
+          clientId = response.clientId;
+        }
+        if (response.method === "message-received") {
+          alert(response.payload);
+        }
+        if (response.method === "joined") {
+          alert("you have been joined");
+        }
+
+        if (response.method === "opponent-chosen-cards") {
+          console.log(response.payload, "cards received");
+        }
+      };
+    </script>
+  </body>
+</html>
