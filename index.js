@@ -1,10 +1,7 @@
 const http = require("http");
-const app = require("express")();
 const forwardMessage = require("./forwardMessage");
 const { guid } = require("./helpers");
-app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 const sendJoinNotification = require("./send-join-notification");
-app.listen(9091, () => console.log("Listening on http port 9091"));
 const websocketServer = require("websocket").server;
 const httpServer = http.createServer();
 httpServer.listen(9090, () => console.log("Listening.. on 9090"));
