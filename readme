@@ -1,0 +1,1 @@
+to send a message to the server you should follow that pattern {method:"message" , payload:'payload', clientId}
