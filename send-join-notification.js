@@ -4,7 +4,7 @@ const joinMe = require("./join.js");
 const sendJoinNotification = (requestInfo, clients, existingRooms) => {
   if (requestInfo.method === "join-me") {
     const client = clients[requestInfo.clientId];
-    const player = joinMe(client, existingRooms, currentRoom);
+    const player = joinMe(client, existingRooms, currentRoom, requestInfo.name);
 
     if (player === "player1") {
       currentRoom = requestInfo.clientId;

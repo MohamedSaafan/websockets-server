@@ -1,8 +1,10 @@
-const joinMe = (client, existingRooms, currentRoom) => {
-  const { clientId, name } = client;
+const joinMe = (client, existingRooms, currentRoom, name) => {
+  const { clientId } = client;
+
   if (currentRoom === "") {
     // then create a room and put the player1 info in it
     existingRooms[clientId] = {};
+    console.log(name, "from name");
     existingRooms[clientId].player1 = {
       clientId,
       name,
