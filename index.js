@@ -7,7 +7,9 @@ const httpServer = http.createServer((req, res) => {
   res.write("Hello World!"); //write a response to the client
   res.end(); //end the response
 });
-httpServer.listen(9090, () => console.log("Listening.. on 9090"));
+httpServer.listen(process.env.PORT || 9090, () =>
+  console.log("Listening.. on 9090")
+);
 //hashmap clients
 
 const existingRooms = {};

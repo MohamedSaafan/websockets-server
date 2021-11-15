@@ -12,8 +12,7 @@
     <button id="sendCards">sendCards</button>
     <input type="text" id="messageInput" autofocus />
     <script>
-      const ws = new WebSocket("ws://localhost:9090/");
-
+      const ws = new WebSocket("ws://obscure-ravine-58334.herokuapp.com/");
       send.addEventListener("click", (e) => {
         ws.send(
           JSON.stringify({
